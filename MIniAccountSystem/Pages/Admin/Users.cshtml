@@ -1,0 +1,43 @@
+﻿@page
+@model MIniAccountSystem.Pages.Admin.UserModel
+
+<h3>User Management</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Current Role</th>
+            <th>Assign Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.RoleName</td>
+                <td>
+                    <form method="post" asp-page-handler="AssignRole">
+                        <input type="hidden" name="userId" value="@user.UserId" />
+                        <select name="role" class="form-select form-select-sm">
+                            <option value="">-- Select Role --</option>
+                            <option>Admin</option>
+                            <option>Accountant</option>
+                            <option>Viewer</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary mt-1">Assign</button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-page="/Admin/AssignPermission" asp-route-userId="@user.UserId" class="btn btn-sm btn-warning">
+                        Permissions
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
