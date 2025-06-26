@@ -1,0 +1,29 @@
+﻿@* @page
+@model MIniAccountSystem.Pages.Accounts.IndexModel
+
+<h2>Account Tree</h2>
+<ul>
+    @foreach (var item in Model.AccountTree)
+    {
+        @RenderAccount(item)
+    }
+</ul>
+
+@functions {
+    void RenderAccount(MIniAccountSystem.Models.Dtos.AccountTreeDto account)
+    {
+        <li>
+            @account.Name
+            @if (account.Children != null && account.Children.Any())
+            {
+                <ul>
+                    @foreach (var child in account.Children)
+                    {
+                        RenderAccount(child);
+                    }
+                </ul>
+            }
+        </li>
+    }
+}
+ *@

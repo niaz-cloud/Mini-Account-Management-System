@@ -42,6 +42,12 @@ using (var scope = app.Services.CreateScope())
     await RoleSeeder.SeedRolesAsync(services);
     await UserSeeder.SeedUsersAsync(services);
 }
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    //await AccountSeeder.SeedAccountsAsync(services);
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
